@@ -1,0 +1,283 @@
+{{ header }}{{ column_left }}
+<div id="content">
+
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <button type="submit" form="form-payment" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+                <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                    {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        {% if error_warning %}
+            <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        {% endif %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+            </div>
+            <div class="panel-body">
+                <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-payment" class="form-horizontal">
+
+                    <div class="form-group ">
+                        <label class="col-sm-2 control-label" for="input-sandbox">{{ entry_sandbox }}</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <select name="payment_hipay_mbway_sandbox" id="input-sandbox" class="form-control">
+                                    {% if payment_hipay_mbway_sandbox %}
+                                        <option value="1" selected="selected">{{ text_enabled }}</option>
+                                        <option value="0">{{ text_disabled }}</option>
+                                    {% else %}
+                                        <option value="1">{{ text_enabled }}</option>
+                                        <option value="0" selected="selected">{{ text_disabled }}</option>
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-12"><br></div>
+
+                        <label class="col-sm-2 control-label" for="input-entity">{{ entry_entity }}</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <select name="payment_hipay_mbway_entity" id="input-entity" class="form-control">
+                                    {% for entity in payment_hipay_mbway_entities %}
+                                        {% if entity == payment_hipay_mbway_entity %}
+                                            <option value="{{ entity }}" selected="selected">{{ entity }}</option>
+                                        {% else %}
+                                            <option value="{{ entity }}">{{ entity }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12"><br></div>
+
+                        <label class="col-sm-2 control-label" for="input-api-user">{{ entry_api_user }}</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <input type="text" name="payment_hipay_mbway_api_user" value="{{ payment_hipay_mbway_api_user }}" placeholder="{{ entry_api_user }}" id="input-api-user" class="form-control" />
+                            </div>
+                            <div class="text-warning">{{ error_mandatory }}</div>
+                        </div>
+                        <div class="col-sm-12"><br></div>
+
+                        <label class="col-sm-2 control-label" for="input-api-password">{{ entry_api_password }}</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <input type="text" name="payment_hipay_mbway_api_password" value="{{ payment_hipay_mbway_api_password }}" placeholder="{{ entry_api_password }}" id="input-api-password" class="form-control" />
+                            </div>
+                            <div class="text-warning">{{ error_mandatory }}</div>
+                        </div>
+                        <div class="col-sm-12"><br></div>
+
+                        <label class="col-sm-2 control-label" for="input-api-category">{{ entry_api_category }}</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <input type="text" name="payment_hipay_mbway_api_category" value="{{ payment_hipay_mbway_api_category }}" placeholder="{{ entry_api_category }}" id="input-api-category" class="form-control" />
+                            </div>
+                            <div class="text-warning">{{ error_mandatory }}</div>
+                        </div>
+                        <div class="col-sm-12"><br></div>
+
+                        <label class="col-sm-2 control-label" for="input-api-description">{{ entry_api_description }}</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <input type="text" name="payment_hipay_mbway_description" value="{{ payment_hipay_mbway_description }}" placeholder="{{ entry_api_description }}" id="input-api-description" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-sm-12"><br></div>
+
+                        <label class="col-sm-2 control-label" for="input-total-min"><span data-toggle="tooltip" title="{{ help_total_min }}">{{ entry_total_min }}</span></label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <input type="text" name="payment_hipay_mbway_total_min" value="{{ payment_hipay_mbway_total_min }}" placeholder="1" id="input-total-min" class="form-control" />
+                            </div>
+                            <div class="text-warning">{{ error_mandatory }}</div>
+                        </div>
+                        <div class="col-sm-12"><br></div>
+
+                        <label class="col-sm-2 control-label" for="input-total-max"><span data-toggle="tooltip" title="{{ help_total_max }}">{{ entry_total_max }}</span></label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <input type="text" name="payment_hipay_mbway_total_max" value="{{ payment_hipay_mbway_total_max }}" placeholder="2500" id="input-total-max" class="form-control" />
+                            </div>
+                            <div class="text-warning">{{ error_mandatory }}</div>
+                        </div>
+                        <div class="col-sm-12"><br></div>
+
+                    </div>
+
+                    <div class="form-group">         
+
+                        <label class="col-sm-2 control-label" for="input-debug">{{ entry_debug }}</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <select name="payment_hipay_mbway_debug" id="input-debug" class="form-control">
+                                    {% if payment_hipay_mbway_debug %}
+                                        <option value="1" selected="selected">{{ text_enabled }}</option>
+                                        <option value="0">{{ text_disabled }}</option>
+                                    {% else %}
+                                        <option value="1">{{ text_enabled }}</option>
+                                        <option value="0" selected="selected">{{ text_disabled }}</option>
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-12"><br></div>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-order-status-pending">{{ entry_order_status_pending }}</label>
+                        <div class="col-sm-10">
+                            <select name="payment_hipay_mbway_order_status_id_pending" id="input-order-status-pending" class="form-control">
+                                {% for order_status in order_statuses %}
+                                    {% if order_status.order_status_id == payment_hipay_mbway_order_status_id_pending %}
+                                        <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
+                                    {% else %}
+                                        <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-sm-12"><br></div>
+
+                        <label class="col-sm-2 control-label" for="input-order-status-paid">{{ entry_order_status_paid }}</label>
+                        <div class="col-sm-10">
+                            <select name="payment_hipay_mbway_order_status_id_paid" id="input-order-status-paid" class="form-control">
+                                {% for order_status in order_statuses %}
+                                    {% if order_status.order_status_id == payment_hipay_mbway_order_status_id_paid %}
+                                        <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
+                                    {% else %}
+                                        <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-sm-12"><br></div>
+
+                        <label class="col-sm-2 control-label" for="input-order-status-cancel">{{ entry_order_status_cancel }}</label>
+                        <div class="col-sm-10">
+                            <select name="payment_hipay_mbway_order_status_id_cancel" id="input-order-status-cancel" class="form-control">
+                                {% for order_status in order_statuses %}
+                                    {% if order_status.order_status_id == payment_hipay_mbway_order_status_id_cancel %}
+                                        <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
+                                    {% else %}
+                                        <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-sm-12"><br></div>
+
+                        <label class="col-sm-2 control-label" for="input-order-status-failed">{{ entry_order_status_failed }}</label>
+                        <div class="col-sm-10">
+                            <select name="payment_hipay_mbway_order_status_id_failed" id="input-order-status-failed" class="form-control">
+                                {% for order_status in order_statuses %}
+                                    {% if order_status.order_status_id == payment_hipay_mbway_order_status_id_failed %}
+                                        <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
+                                    {% else %}
+                                        <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-sm-12"><br></div>
+
+                        <label class="col-sm-2 control-label" for="input-order-status-expired">{{ entry_order_status_expired }}</label>
+                        <div class="col-sm-10">
+                            <select name="payment_hipay_mbway_order_status_id_expired" id="input-order-status-expired" class="form-control">
+                                {% for order_status in order_statuses %}
+                                    {% if order_status.order_status_id == payment_hipay_mbway_order_status_id_expired %}
+                                        <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
+                                    {% else %}
+                                        <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-sm-12"><br></div>
+
+                        <label class="col-sm-2 control-label" for="input-order-status-refunded">{{ entry_order_status_refunded }}</label>
+                        <div class="col-sm-10">
+                            <select name="payment_hipay_mbway_order_status_id_refunded" id="input-order-status-refunded" class="form-control">
+                                {% for order_status in order_statuses %}
+                                    {% if order_status.order_status_id == payment_hipay_mbway_order_status_id_refunded %}
+                                        <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
+                                    {% else %}
+                                        <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-geo-zone">{{ entry_geo_zone }}</label>
+                        <div class="col-sm-10">
+                            <select name="payment_hipay_mbway_geo_zone_id" id="input-geo-zone" class="form-control">
+                                <option value="0">{{ text_all_zones }}</option>
+                                {% for geo_zone in geo_zones %}
+                                    {% if geo_zone.geo_zone_id == payment_hipay_mbway_geo_zone_id %}
+                                        <option value="{{ geo_zone.geo_zone_id }}" selected="selected">{{ geo_zone.name }}</option>
+                                    {% else %}
+                                        <option value="{{ geo_zone.geo_zone_id }}">{{ geo_zone.name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+                        <div class="col-sm-10">
+                            <select name="payment_hipay_mbway_status" id="input-status" class="form-control">
+                                {% if payment_hipay_mbway_status %}
+                                    <option value="1" selected="selected">{{ text_enabled }}</option>
+                                    <option value="0">{{ text_disabled }}</option>
+                                {% else %}
+                                    <option value="1">{{ text_enabled }}</option>
+                                    <option value="0" selected="selected">{{ text_disabled }}</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-sort-order">{{ entry_sort_order }}</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="payment_hipay_mbway_sort_order" value="{{ payment_hipay_mbway_sort_order }}" placeholder="{{ entry_sort_order }}" id="input-sort-order" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-sort-order">Info</label>
+                        <div class="col-sm-3">
+                            SOAP Library: 
+                            {% if payment_hipay_mbway_soap == 1 %}
+                                <i class="fa fa-check-circle"></i>
+                            {% else %}
+                                <span class="badge badge-danger">KO</span>
+                            {% endif %}
+                        </div>
+                        <div class="col-sm-7">
+                            {{ entry_extension_version }}: 
+                            {{ payment_hipay_mbway_extension_version }}
+                        </div>
+
+                    </div>
+            </div>            
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+{{ footer }}
