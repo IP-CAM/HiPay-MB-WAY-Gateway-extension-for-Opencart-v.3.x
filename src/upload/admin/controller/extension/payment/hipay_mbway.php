@@ -3,7 +3,7 @@
 class ControllerExtensionPaymentHipayMbway extends Controller {
 
     private $error = array();
-    private $extension_version = "1.0.0.0";
+    private $extension_version = "1.0.1.0";
 
     public function index() {
         $this->load->language('extension/payment/hipay_mbway');
