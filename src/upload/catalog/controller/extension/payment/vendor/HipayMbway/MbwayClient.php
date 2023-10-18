@@ -9,7 +9,7 @@ namespace HipayMbway;
  */
 class MbwayClient {
 
-    const HIPAY_MBWAY_ENDPOINT_PRODUCTION = "https://mbway.hipay.pt/MBWayWebservice/MBWayV2.svc?singleWsdl";
+    const HIPAY_MBWAY_ENDPOINT_PRODUCTION = "https://mbway.hipay.pt/Webservice/v4/MBWayV2.svc?singleWsdl";
     const HIPAY_MBWAY_ENDPOINT_SANDBOX = "https://mbway.hipay.pt/MBWayWebservice-test/MBWayV2.svc?singleWsdl";
 
     private $soapClient;
